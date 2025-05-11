@@ -1,0 +1,54 @@
+%% -*- coding:utf-8 -*-
+\section{Diffie-Hellman Protocol (DH)}
+\label{sec:add:dm:dh}
+Assume there are two subscribers, Alice and Bob. They are aware of two numbers $g$ and $p$, which are not secret.
+
+Alice chooses a random number $a$ and sends Bob the following value
+\begin{equation}
+A \equiv g^a \mod{p}.
+\label{eqAddDiscretIndDHA}
+\end{equation}
+
+Bob computes the following number (using a secret random value $b$)
+\begin{equation}
+B \equiv g^b \mod{p}.
+\label{eqAddDiscretIndDHB}
+\end{equation}
+
+Alice calculates the key using the number $a$ known only to her
+\begin{equation}
+K \equiv B^a\mod{p} \equiv g^{ab} \mod{p}.
+\label{eqAddDiscretIndDHKey}
+\end{equation}
+
+Bob can obtain the same key value using his secret number $b$:
+\begin{equation}
+K \equiv A^b\mod{p} \equiv g^{ab} \mod{p}.
+\label{eqAddDiscretIndDHKeyB}
+\end{equation}
+
+Thus, Alice and Bob obtain the same key, which can later be used for message transmission using symmetric encryption algorithms (such as AES). \rindex{AES}
+
+\begin{example}
+\emph{(Diffie-Hellman)}
+Initial data (public information): $g = 2$, $p = 23$. Alice selects a random number $a = 6$ and calculates using the formula \eqref{eqAddDiscretIndDHA} the number 
+%power_mod(2, 6, 23);
+$A = 18$ and sends it to Bob.
+Bob chooses a random number $b=9$ and, using the formula \eqref{eqAddDiscretIndDHB}, calculates
+%power_mod(2, 9, 23);
+$B = 6$ and sends this number to Alice.
+
+Alice calculates the key 
+% power_mod(6, 6, 23);
+$K = 12$ using the formula \eqref{eqAddDiscretIndDHKey}. Bob can obtain the same key value 
+% power_mod(18, 9, 23);
+$K = 12$ using \eqref{eqAddDiscretIndDHKeyB}
+\nonumber
+\end{example}
+
+The eavesdropper Eve knows the numbers $g$, $p$, $A$, and $B$. To obtain the key $K$, Eve would need to obtain one of the secret numbers $a$ or $b$:
+\begin{equation}
+a \equiv ind_g\left( A \right) \mod{p},
+\nonumber
+\end{equation}
+from which the desired value $K$ can be obtained using \eqref{eqAddDiscretIndDHKey}.

@@ -1,0 +1,90 @@
+%% -*- coding:utf-8 -*-
+\section{Shor's Algorithm and the Discrete Logarithm on Elliptic Curves} 
+Consider the elliptic curve 
+\[
+E\left(\mathbb{F}\right) = \{
+(x,y) \in \mathbb{F}_p \times \mathbb{F}_p, y^2 = x^3 +a x + b,
+\}
+\]
+with a given base point $g \in E\left(\mathbb{F}_p\right)$ such that: 
+\[
+n g = 0.
+\]
+The task is to solve the following: for the given $q
+\in E\left(\mathbb{F}_p\right)$ find an $x$ such that
+\begin{equation}
+x g = q \mod n
+\label{eq:quantcomp:discretlogeliptic}
+\end{equation}
+
+Consider the following auxiliary function
+\begin{equation}
+f(x_1, x_2) = x_1 q + x_2 g = \left(x x_1 + x_2\right) g,
+\label{eq:quantcomp:discretlogeliptic:f}
+\end{equation}
+where $q,g \in E\left(\mathbb{F}_p\right)$ and are taken from the conditions of our
+problem \eqref{eq:quantcomp:discretlogeliptic}. This function
+is analogous to \eqref{eq:quantcomp:discretlogfunc}
+used in solving the discrete logarithm problem. Then
+we measure this function. The result of this measurement
+is some point $c \in E\left(\mathbb{F}_p\right)$. Moreover, from
+\eqref{eq:quantcomp:discretlogeliptic:f} it follows that 
+$c \in \left<g\right>$, i.e., $\exists x_0$ such that $c = x_0 g$. 
+
+Thus, by analogy with \eqref{eq:quantcomp:shordiscretlog:fprime}, we
+compose the following function 
+\begin{equation}
+\label{eq:quantcomp:shorelliptic:fprime}
+f'\left(x_1, x_2\right) = 
+\begin{cases}
+1, x x_1 + x_2 \equiv x_0 \mod n \\
+0, x x_1 + x_2 \not\equiv x_0 \mod n \\
+\end{cases}
+\end{equation}
+
+The coordinates $(j_1,j_2)$ of the maximum of the Fourier image $\tilde{f'}$ provide
+according to the formula
+\eqref{eq:quantcomp:discretlog:periodfourier} some value
+of the desired number $x$. In our case, almost always $n \ne M$
+so we can only use an approximate estimate
+\[
+x \approx \frac{j_1}{j_2}.
+\]
+
+\begin{example}[Discrete Logarithm on an Elliptic Curve]
+Consider the problem from example \ref{ex:add:discretmath:ecdh}
+The curve and base point (see example \ref{ex:add:elliptic:basepoint})
+are as follows
+\[
+(p,a,b,g,n,h) = (97, -7, 10, (96,93), 41, 2)
+\]
+Suppose we know Alice's public key
+\[
+A = (37, 35)
+\]
+and we want to find an $x \in \{0,1, \dots 40\}$ such that
+$x g = A$, as follows from example \ref{ex:add:discretmath:ecdh}
+the answer is $x = d_a  = 5$.
+Our function under investigation is
+\[
+f\left(x_1,x_2\right) = x_1 A + x_2 g = x_1 (37,35) + x_2 (96,93)
+\]
+
+\input elliptic/figellipticdiscretlog1.tex
+
+As the measurement result, we choose $c = g$, i.e., $x_0 = 1$.
+The graph of the function $f'(x_1, x_2)$, corresponding to this measurement
+is shown in \autoref{fig:quantcomp:dle1}. Note that
+the function $f'(x_1, x_2)$ is periodic and if we take any two closely
+located points such as $(8,2)$ and $(16,3)$ we can see that
+the period in coordinate $x_1$ is $T_1=8$, and in coordinate $x_2$ it is $T_2
+= 1$. Solving the equation $x = T_2 T_1^{-1} \mod n$ we get $x = 8^{-1}
+ \equiv 5 \mod 41$, which corresponds to the desired solution.
+
+\input elliptic/figellipticdiscretlog2.tex
+
+The Fourier image of the function $f'(x_1, x_2)$ is shown in
+\autoref{fig:quantcomp:dle2}. From it, we can find the desired $x =
+5$. 
+
+\end{example}

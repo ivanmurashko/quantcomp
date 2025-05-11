@@ -1,0 +1,38 @@
+\section{Fields}
+\begin{definition}[Field (algebra)]
+  Let there be an Abelian group (see definition
+  \ref{def:add:abeliangroup}) \rindex{Abelian Group} 
+  $(\mathcal{F}, +)$. The identity element of this group $e_\mathcal{F}$ is
+  $0$. Let also $(\mathcal{F} \setminus \{0\}, \cdot)$ be some
+  other group (also Abelian) with the identity element $1$. Additionally, the operations
+  $+,\cdot$ satisfy the distributive property, i.e., $\forall
+  a,b,c \in \mathcal{F}$:
+  \begin{eqnarray}
+  c \cdot \left(a + b\right) = c \cdot a + c \cdot b,
+  \nonumber \\
+  \left(a + b\right) \cdot c = a \cdot c + b \cdot c.
+  \nonumber
+  \end{eqnarray}
+  In this case, $(\mathcal{F}, +, \cdot)$ is called a field.
+  \label{def:field}
+\end{definition}
+
+\begin{example}[Field $\mathbb{Q}$]
+  Note that $\mathbb{Z}$ is not a field because not every
+  integer has an inverse with respect to multiplication. 
+  However, the following set will be a field: $\mathbb{Q} =
+  \left\{a/b \mid a \in \mathbb{Z}, b \in 
+  \mathbb{Z}\setminus\{0\}\right\}$. The inverse with respect to
+  $a/b \in \left(\mathbb{Q}\setminus\{0\}, \cdot\right)$ will be $b/a$.
+  \label{ex:field_q}
+\end{example}
+
+\begin{example}[Field $\mathbb{R}$]
+  The real numbers form a field.
+  \label{ex:field_r}
+\end{example}
+
+\begin{example}[Field $\mathbb{C}$]
+  The complex numbers form a field.
+  \label{ex:field_c}
+\end{example}

@@ -1,0 +1,83 @@
+%% -*- coding:utf-8 -*- 
+\subsection{Finding the Period of Functions Using Quantum Fourier Transform}
+
+To determine the period of the function \eqref{eqPart4QuantCompShorClassPart}, we use the scheme presented in \autoref{figQuantCompQuantPeriodFinding}.
+
+\input rsa/figquantperiodfinding.tex
+
+The first element is the Hadamard transformation on $n$ qubits, \rindex{Hadamard Transformation} which prepares the initial state in the form:
+\begin{equation}
+\ket{in} = \frac{1}{\sqrt{2^n}}\sum_{x=0}^{2^n - 1} \ket{x} \otimes\ket{0}.
+\nonumber
+\end{equation}
+
+After the function computing element $\hat{U}_f$, the state is
+\begin{equation}
+\hat{U}_f\ket{in} = \frac{1}{\sqrt{2^n}}\sum_{x=0}^{2^n - 1} \ket{x} \otimes\left|f\left(x\right)\right>.
+\nonumber
+\end{equation} 
+
+\input rsa/figshorquant.tex
+
+After measuring the function value, only those elements for which the function value is equal to the measured value will remain in the list of coordinates. As a result, the input of the element measuring the Fourier transformation is in the state
+\begin{equation}
+\ket{in'} = \sum_{x'} \ket{x'},
+\nonumber
+\end{equation}
+where all non-zero elements have the same amplitude and follow with a period equal to the period of the studied function. The initial value will have a shift that depends on the experiment (different experiments will have different shifts). Due to lemma \ref{lemmaAddFourierDiscretFourierShiftTime}, the Fourier image will be the same for different function measurements.
+
+Further, according to lemma \ref{lemmaAddFourierDiscretFourierPeriod} (on periodicity) (see also comment \ref{rem:dsp:fourier:periodprop}), it follows that the most probable samples (probability maxima) follow with a period related to the original period of the function. Thus, as a result of several experiments, the period of the desired function can be found with the required level of probability (see \autoref{picPart4QuantCompShorQuantPart}).
+
+\begin{example}
+\emph{Finding the period of the function $f\left(x\right) = 2^x \mod 21$}
+\label{exPart4QuantCompShorQuantPeriodFinding}
+As an example, consider the problem of finding the period of the function $f\left(x, a\right) = a^x \mod{N}$ for $a=2$, $N = 21$, see \autoref{picPart4QuantCompShorQuantPart}.
+
+The number of samples $M$ must be a power of two. In our example, we choose $M = 2^6 = 64$ as the number of samples. Thus, 6 qubits are required for our example.
+
+The initial state after the Hadamard transformation has the form:
+\begin{equation}
+\ket{in} = \frac{1}{8}\sum_{x = 0}^{63}\ket{x} \otimes \ket{0},
+\nonumber
+\end{equation}
+where $\ket{x}$ represents the tensor product \rindex{Tensor product} of 6 qubits that encode the binary representation of the argument of the studied function. For example, for $x=5_{10}=000101_2$ we have
+\[
+\ket{x} = \ket{0}\otimes \ket{0}\otimes \ket{0}\otimes \ket{1}\otimes \ket{0}\otimes \ket{1}
+\]
+
+After computing the function, we have a state of the form (see the top graph in \autoref{picPart4QuantCompShorQuantPart})
+\begin{eqnarray}
+\hat{U}_f\ket{in} = \frac{1}{8}\sum_{x = 0}^{63}\ket{x} \otimes \left|f\left(x\right)\right> = 
+\nonumber \\
+=
+\frac{1}{8}
+\left(
+\ket{0}\otimes\ket{2} + 
+\ket{1}\otimes\ket{4} + 
+\ket{2}\otimes\ket{8} + \dots +
+\right.
+\nonumber \\
+\left.
++
+\ket{62}\otimes\ket{8} +
+\ket{63}\otimes\ket{16}
+\right).
+\label{eqPart4QuantCompShorPFExample1}
+\end{eqnarray}
+
+If the result of measuring the function was equal to $1$, then from the entire sum \eqref{eqPart4QuantCompShorPFExample1} the terms for which the function value is equal to $1$ will remain (see the middle graph in \autoref{picPart4QuantCompShorQuantPart}):
+\begin{equation}
+\ket{in'} = \frac{1}{\sqrt{10}}\left( 
+\ket{5}\otimes\ket{1} +
+\ket{11}\otimes\ket{1} +
+\ket{17}\otimes\ket{1} +
+\dots +
+\ket{60}\otimes\ket{1}
+\right).
+\label{eqPart4QuantCompShorPFExample2}
+\end{equation} 
+Expression \eqref{eqPart4QuantCompShorPFExample2} contains 10 terms of the same amplitude, so the normalization factor is $\frac{1}{\sqrt{10}}$.
+
+The Fourier transform for the sequence \eqref{eqPart4QuantCompShorPFExample2} is shown in the lower graph \autoref{picPart4QuantCompShorQuantPart}. The most probable values of the Fourier transform result will be the values corresponding to local maxima repeating with the period $\frac{M}{r}\approx10.67$ from which the period of the desired function can be found $r=6$. 
+
+\end{example}

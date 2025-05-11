@@ -1,0 +1,69 @@
+\section{Discrete Logarithm}
+\label{AddDiscretLog}
+
+\begin{definition}[Discrete Logarithm]
+Consider some abelian multiplicative group $G$ and the equation 
+\begin{equation}
+g^x = a
+\label{eq:add:dm:discretlog}
+\end{equation}
+The solution to this equation, i.e., a non-negative integer $x$
+satisfying the equation \eqref{eq:add:dm:discretlog}, is called
+a discrete logarithm.
+\end{definition}
+
+Equation \eqref{eq:add:dm:discretlog} does not generally have a solution for any values of $a$. However, if $g$ is a generating element of $G$, i.e., $G=<g>$, then a solution always exists and is unique. When discussing discrete logarithms, we will assume that $g$ is chosen such that $G=<g>$.
+
+In applied cryptography, we often deal with a special kind of
+discrete logarithm in the ring of residues modulo $p$:
+\begin{definition}[Discrete Logarithm in the Ring of Residues Modulo $p$]
+The discrete logarithm $ind_g\left(a\right) \mod{p}$
+\footnote{From the word {\bf ind}ex - an alternative name for the discrete logarithm}
+is defined as the
+smallest number $x$ that satisfies the following equation
+(if such a number exists): 
+\begin{equation}
+g^x \equiv a \mod{p}
+\end{equation}
+\end{definition}
+
+\begin{example}
+\emph{($ind_3{14} \mod{17}$)}
+Let's solve the problem by method of enumeration \cite{bWikiDiscretLog}:
+\begin{eqnarray}
+3^1 \equiv 3 \mod{17},\: 
+3^2 \equiv 9 \mod{17},\: 
+3^3 \equiv 10 \mod{17},\:
+3^4 \equiv 13 \mod{17}, 
+\nonumber \\
+3^5 \equiv 5 \mod{17},\: 
+3^6 \equiv 15 \mod{17},\: 
+3^7 \equiv 11 \mod{17},\: 
+3^8 \equiv 16 \mod{17}, 
+\nonumber \\
+3^9 \equiv 14 \mod{17},\: 
+3^{10} \equiv 8 \mod{17},\: 
+3^{11} \equiv 7 \mod{17},\: 
+3^{12} \equiv 4 \mod{17}, 
+\nonumber \\
+3^{13} \equiv 12 \mod{17},\: 
+3^{14} \equiv 2 \mod{17},\:
+3^{15} \equiv 6 \mod{17},\: 
+3^{16} \equiv 1 \mod{17},
+\nonumber
+\end{eqnarray}
+Thus, it can be seen that $ind_3{14} \mod{17} = 9$, 
+since $3^9 \equiv 14 \mod{17}$. 
+\label{ex:dm:discretlog}
+\end{example}
+
+The problem of finding the discrete logarithm is a complex
+task. The fastest known algorithm
+\cite{bGordon93discretelogarithms} solves it in time on the order of 
+\(
+O\left(c \cdot
+exp\left(\log{p}^{\frac{1}{3}}\log{\log{p}}^{\frac{2}{3}}
+\right)\right)
+\), where $c$ is some constant,
+which is why algorithms using
+discrete logarithms are widely applied in cryptography.

@@ -1,0 +1,404 @@
+%% -*- coding:utf-8 -*- 
+\section{Dirac Formulation of Quantum Mechanics}
+\label{AddDirac}
+In the lecture course on quantum optics, we will consistently use the Dirac formalism \cite{bDiracPrincipleQuantumMechanic}. In the usual formulation of quantum mechanics, we deal with wave functions, for example, $\psi\left(q, t\right)$ – the wave function in the coordinate representation. The same state of the system can be described by wave functions in different representations, related to each other by linear transformations. For example, the wave function in the momentum representation is related to the wave function in the coordinate representation by the equation:
+\begin{equation}
+\phi\left(p, t\right) = \frac{1}{2 \pi \hbar} \int_{-\infty}^{+\infty}
+\psi \left(q, t\right) e^{-i \frac{p q}{\hbar}} dq
+\end{equation}
+The main point here is that the same state can be described by wave functions expressed through different variables. From this, it follows that one can introduce a more general concept that characterizes the state of the system regardless of the representation. For such a concept, Dirac introduced the notion of a wave vector, or state vector, denoted by:
+\begin{equation}
+\left| \dots \right>
+\end{equation}
+and called the ket vector.
+
+\subsection{Ket Vector}
+$\left| \dots \right>$ is the general designation of a ket vector; $\left| a \right>$, $\ket{ x }$, $\left| \psi \right>$, etc., denote ket vectors describing certain particular states, the symbols of which are written inside the brackets.
+
+\subsection{Bra Vectors}
+Each ket vector corresponds to a conjugate bra vector. The bra vector is denoted by:
+\begin{equation}
+\left< \dots \right|, \quad 
+\bra{ a }, \quad  
+\left< \psi \right|.
+\end{equation}
+
+The names bra and ket vectors are derived from the first and second halves of the English word {\itshape bra-cket}.
+
+Thus, the bra vectors
+$\bra{ a }$, $\bra{ x }$, $\bra{ \psi }$
+correspond to their conjugate ket vectors  
+$\ket{ a }$,  $\ket{ x }$, $\ket{ \psi }$
+and vice versa. For state vectors, the same basic relationships hold that are true for wave functions:
+\begin{equation}
+\ket{ u } = \ket{ a }  + \ket{ b }, \quad 
+\bra{ u } = \bra{ a }  + \bra{ b }, \quad 
+\ket{ v } = l \ket{ a }, \quad  
+\bra{ v } = l \bra{ a }.
+\end{equation}
+Bra and ket vectors are related to each other by the operation of Hermitian conjugation:
+\begin{equation}
+\ket{ u } = \left( \bra{ u } \right)^{\dag}, \quad 
+\bra{ u } = \left( \ket{ u } \right)^{\dag}.
+\end{equation}
+
+In well-known cases this reduces to the following relationships:
+\[
+\left( \psi\left( q \right) \right)^{\dag} = \psi^{*}\left( q \right)
+\]
+for the wave function in the coordinate representation;
+\[
+\left(
+\begin{array} {c} 
+a_1 \\
+a_2 \\
+\vdots \\
+a_n
+\end{array}
+ \right)^{\dag} = 
+\left( a_1^{*}, a_2^{*}, \cdots, a_n^{*}\right)
+\]
+in the matrix representation.
+
+With the help of bra and ket vectors, one can define the scalar product
+\begin{equation}
+\bra{ v }\ket{ u } = \bra{ u }\ket{ v }^{*}.
+\label{eqAddDirac_swap}
+\end{equation}
+
+In specific cases, this means:
+\[
+\left< \psi \right|\left. \phi \right> = 
+\int \psi^{*} \phi dq
+\]
+in the coordinate representation;
+\[
+\bra{ a }\ket{ b } = 
+\left( a_1^{*}, a_2^{*}, \cdots, a_n^{*}\right) 
+\left(
+\begin{array} {c} 
+b_1 \\
+b_2 \\
+\vdots \\
+b_n
+\end{array}
+ \right) = 
+a_1^{*} b_1 +  a_2^{*} b_2 + \cdots + a_n^{*} b_n
+\]
+in the matrix representation.
+
+From the relationship \eqref{eqAddDirac_swap} it follows that the norm of the vector is real. Additionally, we assume that the norm of the vector is non-negative: 
+$\bra{ a }\ket{ a } \geq 0$.
+
+\subsection{Operators}
+In quantum mechanics, linear operators are used. Operators connect one state vector with another: 
+\begin{equation}
+\ket{ q } = \hat{L}\ket{ p }
+\label{eqAddDirac_operator_property1}
+\end{equation}
+The conjugate equality is of the form
+\begin{equation}
+\bra{ q } = \bra{ p }  \hat{L}^{\dag}
+\label{eqAddDirac_operator_property2}
+\end{equation}
+where $\hat{L}^{\dag}$ is the operator conjugated to the operator $\hat{L}$.
+
+We give some relationships that are valid for linear operators:
+\begin{eqnarray}
+\hat{L}^{++} = \hat{L}, \quad
+\left(l \hat{L} \ket{ a } \right)^{\dag} = 
+l^{*} \bra{ a } \hat{L}^{\dag}, 
+\nonumber \\
+\left(\left(\hat{L_1} + \hat{L_2} \right) \ket{ a } \right)^{\dag} = 
+\bra{ a } \left(\hat{L_1}^{\dag} + \hat{L_2}^\dag \right), 
+\nonumber \\
+\left(\left(\hat{L_1} \hat{L_2} \right) \ket{ a } \right)^{\dag} = 
+\bra{ a } \left(\hat{L_2}^{\dag} \hat{L_1}^\dag \right),
+\nonumber \\
+\left(\left(\hat{L_1} \hat{L_2} \hat{L_3}\right) \ket{ a } \right)^{\dag} = 
+\bra{ a } \left(\hat{L_3}^{\dag} \hat{L_2}^\dag \hat{L_1}^\dag \right), 
+\mbox{ etc.}
+\label{eqAddDirac_propert}
+\end{eqnarray}
+
+Note that the algebra of operators coincides with the algebra of square matrices. The matrix elements of operators are denoted as follows: 
+\begin{equation}
+\bra{a}\hat{L}\ket{b} = L_{ab}
+\end{equation}
+
+For matrix elements, the equalities are valid
+\begin{equation}
+\bra{a}\hat{L}\ket{b}^{*} = 
+\bra{b}\hat{L}^{\dag}\ket{a}, \quad
+\bra{a}\hat{L_1}\hat{L_2}\ket{b}^{*} = 
+\bra{b}\hat{L_2}^{\dag}\hat{L_1}^\dag\ket{a}
+\end{equation}
+
+\subsection{Eigenvalues and Eigenvectors of Operators} 
+The eigenvalues and eigenvectors of operators are determined by the equality
+\begin{equation}
+\hat{L} \ket{l_n} = l_n \ket{l_n},
+\end{equation}
+where $l_n$ is the eigenvalue; $\ket{l_n}$ is the eigenvector.
+
+For bra vectors we have similar equalities:
+\begin{equation}
+\bra{d_n} \hat{D}  = d_n \bra{d_n}.
+\end{equation}
+
+If the operators correspond to observable quantities, they must be self-adjoint:
+\begin{equation}
+\hat{L}  = \hat{L}^{\dag}.
+\label{eqAddDirac_ermit}
+\end{equation}
+
+The eigenvalues of a self-adjoint (Hermitian) operator are real. Indeed, from 
+\[
+\hat{L} \ket{ l } = l \ket{ l }
+\]
+it follows that 
+\[
+\bra{ l } \hat{L} \ket{ l } = l \bra{ l }
+\ket{ l }.
+\]
+On the other hand, recalling \eqref{eqAddDirac_propert}:
+$\bra{ l } \hat{L}^{\dag} = l^{*} \bra{ l }$, from
+\eqref{eqAddDirac_ermit} we have
+\[
+\bra{ l } \hat{L} \ket{ l } = l^{*} \bra{ l }
+\ket{ l }.
+\] 
+Thus $l\bra{ l }
+\ket{ l } = l^{*}\bra{ l }
+\ket{ l }$, i.e., $l  = l^{*}$
+
+The eigenvectors of a self-adjoint operator are orthogonal. 
+Indeed, consider two eigenvectors 
+$\ket{ l_1 }$ and $\ket{ l_2 }$:
+\[
+\hat{L} \ket{ l_1 } = l_1 \ket{ l_1 }, \quad
+\hat{L} \ket{ l_2 } = l_2 \ket{ l_2 }
+\]
+From the second relationship we get
+\[
+\bra{ l_1 } \hat{L} \ket{ l_2 } = l_2 \bra{ l_1 } \ket{ l_2 }
+\]
+Considering the reality of the eigenvalues and the relationship
+\eqref{eqAddDirac_ermit} for the vector $\ket{ l_1 }$, we get:
+\[
+\bra{ l_1 } \hat{L} = l_1 \bra{ l_1 }.
+\]
+From where
+\[
+\bra{ l_1 } \hat{L} \ket{ l_2 } = l_1 \bra{ l_1 } \ket{ l_2 }.
+\] 
+Thus
+\[
+\left(l_1 - l_2\right) \bra{ l_1 } \ket{ l_2 } = 0, 
+\quad \mbox{i.e., } \bra{ l_1 } \ket{ l_2 } = 0,
+\mbox{ since } l_1 \neq l_2.
+\] 
+
+\subsection{Observables. Decomposition by Eigenvectors.  
+Completeness of the System of Eigenvectors}
+Operators corresponding to observable physical quantities are
+self-adjoint operators. This ensures the reality of the values of the observable physical quantity. We have a set of eigenstates of a Hermitian operator  
+$\ket{ l_n }$,  $\hat{L} \ket{ l_n } = l_n \left| l_n
+\right>$.  If the set of eigenstates is complete, according to the principles
+of quantum mechanics, any state can be represented as a superposition
+of states $\ket{ l_n }$:
+\begin{equation}  
+\left| \psi \right> = \sum_{(n)} c_n \ket{ l_n }.
+\end{equation}  
+
+Thus for the decomposition coefficients we have:  
+$c_n = \bra{ l_n } \left. \psi \right>$, and therefore
+the equality holds
+\begin{equation}  
+\left| \psi \right> = \sum_{(n)} \bra{ l_n } \left. \psi
+\right> \ket{ l_n } = 
+\sum_{(n)} \ket{ l_n } \bra{ l_n } \left. \psi
+\right>.
+\label{eqAddDirac_full}
+\end{equation}  
+
+From the equality \ref{eqAddDirac_full} follows the important relation:
+\begin{equation}  
+\sum_{(n)} \ket{ l_n } \bra{ l_n } = \hat{I}.
+\label{eqAddDiracI}
+\end{equation}  
+where $\hat{I}$ is the unit operator. This equality is the condition
+of completeness of the system of eigenvectors (the condition for decomposability). 
+
+\subsection{Projection Operator}
+\label{AddDiracProjector}
+
+Consider the operator \(\hat{P}_n = \ket{ l_n } \left< l_n
+\right|\). 
+The result of the action of this operator on the state 
+\(\left| \psi \right>\) will be
+\begin{equation}
+\hat{P}_n \left| \psi \right> = \sum_{(k)} \ket{ l_n } \left<
+l_n \right| c_k \ket{ l_k } = c_n \ket{ l_n }.
+\label{eqDiracProektor}
+\end{equation}
+The operator \(\hat{P}_n = \ket{ l_n } \bra{ l_n }\) is called
+the projection operator.
+
+One can write the following properties of this operator
+\begin{equation}  
+\sum_{(n)} \hat{P}_n = \hat{I}.
+\end{equation}  
+
+\begin{equation}  
+\hat{P}_n^2 = \hat{P}_n.
+\end{equation}  
+
+\input ./qm/figproject.tex
+The action of the projection operator has a simple geometric
+interpretation (see \autoref{figAddProject}):
+\[
+\hat{P}_n\left|\psi\right> = \cos{\theta} \ket{l_n},
+\]
+where $\cos{\theta} = \left<\psi|l_n\right> = c_n$. 
+
+\subsection{Trace of the Operator}
+\label{AddDiracTrace}
+In an orthonormal basis \(\left\{\ket{l_n}\right\}\) 
+the quantity 
+\begin{equation}  
+Sp \hat{L} = \sum_n \bra{l_n} \hat{L} \ket{l_n}
+\label{eqAddDiracTr}
+\end{equation}  
+is called the trace of the operator \(\hat{L}\). Under certain conditions
+\cite{bTraceClassOperatorAdd1} the series \ref{eqAddDiracTr}
+converges absolutely and does not depend on the choice of basis.
+
+If using the matrix representation 
+\[
+L_{kn} = \bra{l_k} \hat{L} \ket{l_n}, 
+\]
+then the trace of the operator is the sum of the diagonal elements of the matrix 
+representation
+\[
+Sp \hat{L} = \sum_n L_{nn}
+\]
+
+The following properties of the trace of the operator can be written:
+\begin{eqnarray}
+Sp\left(l \hat{L} + m \hat{M}\right) = 
+l Sp \hat{L} + m Sp \hat{M},
+\nonumber \\
+Sp\left(\hat{L}\hat{M}\right) = 
+Sp\left(\hat{M}\hat{L}\right).
+\label{eqAddDiracTrProperty}
+\end{eqnarray}
+
+\subsection{Expectation Values of Operators}
+The expectation value of an operator $\hat{L}$ in the state $\left| \psi
+\right>$ is given by the equation 
+\begin{equation}  
+\left< \hat{L} \right>_{\psi} = \bra{\psi}\hat{L}\ket{\psi}
+\label{eqAddDiracMid}
+\end{equation}  
+under the condition
+\[
+\bra{\psi}\ket{\psi} = 1.
+\]
+
+Indeed, if we assume that $\ket{\psi}$ can be expanded into
+a series by the eigenfunctions of the operator $\hat{L}$ as follows:
+\[
+\ket{\psi} = \sum_n c_n \ket{l_n},
+\]
+then $\hat{L}\left|\psi\right>$ can be written as
+\[
+\hat{L}\ket{\psi} = \sum_n l_n c_n \ket{l_n},
+\]
+where $l_n$ is the eigenvalue corresponding to the eigenstate 
+$\ket{l_n}$. 
+If we now substitute the last two expressions into \eqref{eqAddDiracMid}
+we get:
+\[
+\bra{\psi}\hat{L}\ket{\psi} = \sum_{n,m} 
+l_n c_n c_m^{*} \bra{l_m}\ket{l_n}=
+\sum_n l_n c_n c_n^{*} = 
+\sum_n l_n \left|c_n\right|^2, 
+\]
+which (under the condition $\left<\psi\right.\left|\psi\right> = 1$) proves,
+that the expression \eqref{eqAddDiracMid} indeed 
+represents the expression for the expectation value of the operator 
+$\hat{L}$ in the state $\left|\psi\right>$.
+\footnote{To do this, it is enough to recall that $\left|c_n\right|^2$
+  gives the probability of finding the system in the state $\ket{l_n}$,
+  i.e., to get the measurement value in $l_n$}
+
+If we take some orthonormal basis $\{\ket{ n }\}$,
+forming a complete set, i.e., satisfying the condition
+\eqref{eqAddDiracI}: $\sum_n \ket{ n }\bra{ n } =
+\hat{I}$, then expression \eqref{eqAddDiracMid}
+can be rewritten as follows:
+\begin{eqnarray}
+\left< \hat{L} \right>_{\psi} = 
+\bra{\psi}\hat{L}\ket{\psi} = 
+\bra{\psi}\hat{I}\hat{L}\ket{\psi} = 
+\nonumber \\
+= 
+\sum_n \bra{\psi}\ket{n}\bra{n}
+\hat{L}\ket{\psi} = 
+\sum_n \bra{n}
+\hat{L}\ket{\psi}\bra{\psi}\ket{n} = 
+Sp \left(\hat{L} \hat{\rho} \right),
+\nonumber
+\end{eqnarray}
+where 
+\(
+\hat{\rho} = \ket{\psi}\bra{\psi} = \hat{P}_{\psi}
+\) is the projection operator on the state 
+$\left| \psi \right>$.
+Considering \eqref{eqAddDiracTrProperty} one can write
+\begin{equation}
+\left< \hat{L} \right>_{\psi} = Sp \left(\hat{\rho} \hat{L} \right).
+\label{eqAddDiracMidViaRho}
+\end{equation}
+
+\subsection{Representation of Operators Using Outer Products of Eigenvectors}
+Using the completeness condition \eqref{eqAddDirac_full} twice, we get:
+\begin{equation}
+\hat{A} = \hat{I} \hat{A} \hat{I} = \sum_{(l)}\sum_{(l')} 
+\ket{l}\bra{l} \hat{A} \ket{l'}\bra{l'} = 
+\sum_{(l)}\sum_{(l')} 
+\ket{l}\bra{l'} A_{ll'},
+\end{equation}  
+where $A_{ll'} = \bra{l} \hat{A} \ket{l'}$ is the matrix
+element of the operator $\hat{A}$ in the representation $\ket{l}$.
+ 
+An operator expressed through its own eigenvectors can be
+represented by the decomposition \footnote{Provided that
+the normalization of the eigenvectors: $\bra{l}\ket{l} = 1$} 
+\begin{equation}
+\hat{L} = \sum_{(l)} 
+l \ket{l}\bra{l}.
+\end{equation}  
+
+The generalization of this equality for an operator function has the form
+\begin{equation}
+F\left(\hat{L}\right) = \sum_{(l)} 
+F\left(l\right) \ket{l}\bra{l}.
+\label{eqAddDiracFL}
+\end{equation}  
+
+\subsection{Wave Functions in Coordinate and Momentum Representations}
+The transition from a state vector to a wave function is carried out
+by scalar multiplication of this state vector by the state
+vector of the corresponding observable quantity. For example, for the wave
+function in the coordinate representation 
+\begin{equation}
+\phi\left(q\right) = \bra{q}\left.\psi\right>.
+\end{equation}  
+where $\bra{q}$ is the eigenvector of the coordinate operator. 
+In the momentum representation, we get:
+\begin{equation}
+\phi\left(p\right) = \bra{p}\left.\psi\right>.
+\end{equation}  
+where $\bra{p}$ is the eigenvector of the momentum operator.

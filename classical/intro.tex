@@ -1,0 +1,26 @@
+%% -*- coding:utf-8 -*- 
+From the moment the importance of information was recognized, means of its protection began to appear. 
+
+New methods of encryption were invented, such as the Caesar cipher, in which each letter of the alphabet was replaced by another (for example, the one three positions later in the alphabet). Alongside new encryption methods, ways to break these ciphers appeared. For example, for the Caesar cipher, one can use the statistical properties of the language in which the original message was written.
+
+Very often, the security of a cipher was ensured by keeping the algorithm that provided encryption secret, as in the Caesar cipher discussed above. In modern classical cryptography, algorithms are often published and accessible for study by anyone. Secrecy is ensured by mixing the message itself with a secret key according to a certain open algorithm.
+
+Suppose we need to transmit a message from Alice to Bob over a secure communication channel. The message must be in a digital form. The protocol describing this transmission consists of several stages. In the first stage, Alice and Bob must obtain a common random sequence of numbers, which will be called a key. This procedure is called key distribution.
+
+In the next stage, Alice must use a certain algorithm $E$ to obtain an encrypted message $C$ from the original message $P$ and the key $K$. This procedure can be described by the following equation:
+\begin{equation}
+E_{K}\left(P\right) = C.
+\label{eqPart3CryptoEncryptClass}
+\end{equation}
+
+In the third stage, the encrypted message must be transmitted to Bob.
+
+In the final stage, Bob, using the known algorithm $D$ and the key $K$ obtained in the first stage, must recover the original message $P$ from the received encrypted message $C$. This procedure can be described by the following equation:
+\begin{equation}
+D_{K}\left(C\right) = P.
+\label{eqPart3CryptoDeEncryptClass}
+\end{equation}
+
+An analysis of this protocol raises the following questions. How to implement secure key distribution. Second, does an absolutely secure algorithm exist? And finally, is it possible to securely transmit an encrypted message in such a way that it cannot be intercepted or modified?
+
+Classical cryptography provides a definitive answer only to the second question. An absolutely secure algorithm exists — it is called a one-time pad. Below is a detailed description of this algorithm.

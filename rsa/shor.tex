@@ -1,0 +1,140 @@
+%% -*- coding:utf-8 -*- 
+\section{Shor's Algorithm}
+\label{Part4QuantCompShor}
+One of the most popular RSA encryption algorithms (see 
+\autoref{AddRSA}) \rindex{RSA algorithm}
+is based on the assumption of the complexity of factorization
+(factoring into prime numbers) of large numbers. Therefore,
+algorithms that allow performing factorization into prime numbers
+are of particular interest. Below is the description of such
+an algorithm proposed by Shor \cite{bShor94}.
+
+\subsection{Number Factorization and Period Finding for Functions}
+\label{sec:rsa:algoshor:periodfind}
+The problem of factorizing a certain number $N$ is closely related to finding the period
+of functions. Consider the following, which is called the modular exponentiation function
+\begin{equation}
+f\left(x, a\right) = a^x \mod N.
+\label{eqRsaQuantCompShorClassPart}
+\end{equation}
+The function \eqref{eqRsaQuantCompShorClassPart} depends on
+the analyzed number $N$ and two arguments $x$ and $a$. The argument $a$
+is chosen from the following conditions
+\begin{eqnarray}
+0 < a < N,
+\nonumber \\
+\gcd\left(N, a\right) = 1.
+\label{eqRsaQuantCompShorAConditions}
+\end{eqnarray}
+A typical graph of the function \eqref{eqRsaQuantCompShorClassPart} is presented in
+\autoref{picRsaQuantCompShorClassPart}.
+
+% maxima a = 2 N = 21
+%draw2d(yrange=[0, 18], points_joined = true, point_type = 6,
+%point_size = 2, points(makelist([x, power_mod(2, x, 21)], x, 0, 30)),
+%user_preamble="set output 'picshorclass.tex'; set terminal latex; set
+%xlabel '$x$'; set ylabel '$f(x)$'");
+
+\input ./rsa/figshorclass.tex
+
+The conditions for selecting the coefficient $a$
+\eqref{eqRsaQuantCompShorAConditions} are such that $a$ and $N$ do not have
+common divisors. If such divisors exist, they are the desired solution to the factorization problem and can be easily found using the Euclidean algorithm (see \autoref{AddEuclidean}).
+
+The function \eqref{eqRsaQuantCompShorClassPart} is periodic,
+i.e., there exists a number $r$ such that $f\left(x + r, a\right) = 
+f\left(x, a\right)$. The smallest possible number $r$ is called
+the period of the function \eqref{eqRsaQuantCompShorClassPart}. 
+
+To prove the periodicity, note that $f\left(x, a\right)$ cannot
+be equal to zero. Indeed, if the condition
+$f\left(x, a\right) = 0$ is met, then 
+\[
+\exists x \in \left\{0, 1, \dots\right\}:
+a^x = k \cdot N,
+\]
+where $k$ is an integer, which is not possible due to
+the coprimeness of $a$ and $N$ \eqref{eqRsaQuantCompShorAConditions}
+\footnote{Here it is obviously assumed that $N > 1$}.
+
+Thus, the range of values of function
+\eqref{eqRsaQuantCompShorClassPart} is limited to the set 
+\begin{equation}
+f\left(x,
+a\right) \in \left\{1, \dots, N - 1\right\},
+\nonumber
+\end{equation}
+hence 
+\begin{equation}
+\exists k,j: k > j, k,j \in \left\{0, 1, \dots, N\right\},
+f\left(k,a\right) = f\left(j,a\right),
+\nonumber
+\end{equation}
+which proves the periodicity of the function \eqref{eqRsaQuantCompShorClassPart}.
+
+Let $k = j + r$, then
+\[
+a^k \mod{N} = a^{j + r} \mod{N} = a^j a^r \mod{N}= a^j \mod{N},
+\]
+since $a$ and $N$ are coprime, we can write
+\begin{equation}
+a^r \equiv 1 \mod{N}.
+\label{eqRsaQuantCompShorPeriodConditions}
+\end{equation}
+
+
+The period of the function \eqref{eqRsaQuantCompShorClassPart} can be either
+even or odd. In Shor's algorithm, we are interested in the former case:
+the period is an even number. Otherwise, a new number $a$ is chosen and the period finding is repeated. Thus, considering $r= 2\cdot l$ we
+can rewrite \eqref{eqRsaQuantCompShorPeriodConditions} as
+\begin{equation}
+a^{2 \cdot l} \equiv 1 \mod{N},
+\nonumber
+\end{equation}
+and since $r$ is the smallest number satisfying the periodicity condition, then
+\[
+a^{l} \not\equiv 1 \mod{N}.
+\]
+If, at the same time, a number $a$ is chosen such that 
+\[
+a^{l} \not\equiv -1 \mod{N},
+\]
+then we have 
+\begin{equation}
+\left(a^l - 1\right)\left(a^l + 1\right) = k \cdot N,
+\label{eqRsaQuantCompShorPeriodFinal}
+\end{equation}
+where $k$ is some integer. From
+\eqref{eqRsaQuantCompShorPeriodFinal} we find that $a^l \pm 1$ have
+common non-trivial (different from 1) divisors with $N$.
+
+\begin{example}
+\emph{Finding the Divisors of the Number $N=21$}
+\label{exRsaQuantCompShorGCD}
+As an example, consider the problem of finding the divisors of $N =
+21$. Choosing $a=2$, we obtain the period of the function
+\eqref{eqRsaQuantCompShorClassPart} $r = 6$ (see
+\autoref{picRsaQuantCompShorClassPart}). 
+Obviously,
+\[
+2^3 \equiv 8 \mod{21} \not\equiv -1 \mod{21}.
+\]
+Thus, by finding the corresponding greatest common divisors, we solve
+the problem
+\begin{eqnarray}
+\gcd\left( 2^3 - 1, 21 \right) = \gcd\left( 7, 21 \right)
+= 7,
+\nonumber \\
+\gcd\left( 2^3 + 1, 21 \right) = \gcd\left( 9, 21 \right)
+= 3,
+\nonumber \\
+21 = 7 \cdot 3.
+\nonumber
+\end{eqnarray}
+\end{example}
+
+Thus, the problem of factorizing the number $N$ can be reduced to
+the problem of finding the period of a certain function using the following
+algorithm:
+\rindex{Shor's algorithm}
+\input rsa/shoralgo.tex

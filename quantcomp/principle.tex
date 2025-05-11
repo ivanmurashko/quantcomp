@@ -1,0 +1,56 @@
+\section{Basic Principles of Quantum Computing}
+
+\subsection{Information Representation. Classical and Quantum States}
+The main difference between quantum and classical computers lies in how they store information.
+
+In the classical case, information is stored in certain memory cells. The state of each memory cell is described by a single number that can take the value 0 or 1. If $m$ memory cells are combined, the overall state of the classical system (which it can take at a particular moment in time) is described by $m$ numbers.
+
+In the quantum case, a memory cell is represented by a qubit, which requires two complex numbers $\alpha_0$ and $\alpha_1$ for its description \footnote{More precisely, it is described by three real numbers, because $\alpha_{0,1}$ are subject to the constraint $\left|\alpha_0\right|^2 + \left|\alpha_1\right|^2 = 1$, from which, considering $\alpha_{0,1} = r_{0,1}e^{i \theta_{0,1}}$, we get that $r_0^2 = 1 - r_1^2$}:
+\[
+\left|\psi\right>_1 = \alpha_0 \ket{ 0 } + \alpha_1 \ket{ 1 }.
+\]
+To describe a composite system consisting of $m$ qubits, $2^m$ complex numbers are required. In other words, a quantum state contains all possible classical states as a superposition. As an example, consider a system consisting of 3 qubits:
+\begin{eqnarray}
+\left|\psi\right>_3 = 
+\alpha_0 \ket{ 000 } + 
+\alpha_1 \ket{ 001 } + 
+\alpha_2 \ket{ 010 } + 
+\alpha_3 \ket{ 011 } + 
+\nonumber \\
++ 
+\alpha_4 \ket{ 100 } + 
+\alpha_5 \ket{ 101 } + 
+\alpha_6 \ket{ 110 } + 
+\alpha_7 \ket{ 111 }.
+\label{eqQuantCompPrinciplePsi8}
+\end{eqnarray}
+As can be seen, any classical state of a system of 3 bits is represented as one of the terms in the superposition \eqref{eqQuantCompPrinciplePsi8}. For example, the number $5_{10}=101_2$ appears in \eqref{eqQuantCompPrinciplePsi8} with the coefficient $\alpha_5$.
+
+\subsection{Reversible Computations}
+
+\input ./quantcomp/figclasscomp.tex
+
+In the classical case, computation involves transforming the original $n$ bits into a result described by $m$ bits (see \autoref{figQuantCompClassComp}). The transformation is defined by a certain function $f\left(x\right)$. A typical example is addition modulo 2 (see Table \ref{tblXOR}) where the input consists of 2 bits ($n = 2$), and the output is 1 bit ($m = 1$).
+
+\input ./quantcomp/figquantcomp.tex
+
+Such a scheme will not work in the quantum case, primarily because the change of pure quantum states over time must occur via a unitary evolution operator \eqref{eqAddDiracEvolutionOper}, i.e., it must be reversible, which is impossible for our classical example \footnote{it is impossible to derive two bits of source information from one bit (result)}. Therefore, in quantum computing, a different scheme is used (see \autoref{figQuantCompQuantComp}) that allows reversible computations.
+
+The input consists of the initial data $x$ described by $n$ qubits, along with $m$ qubits in the state $\ket{0}$, so that the total number of inputs and outputs matches each other. Consequently, the relationship between input and output can be described as
+\footnote{More precisely, it is generally written as 
+$
+\underbrace{\ket{x}}_n
+\underbrace{\left|f\left(x\right)\right>}_m
+\underbrace{\ket{r}}_k = 
+\hat{U}_f \underbrace{\ket{x}}_n
+\underbrace{\left|0 \dots 0\right>}_{m+k},
+$
+where $\ket{r}$ is a remainder of size $k$ qubits not used in the computations, serving to ensure the unitarity of the operator $\hat{U}_f$
+}
+\begin{equation}
+\underbrace{\ket{x}}_n
+\underbrace{\left|f\left(x\right)\right>}_m = 
+\hat{U}_f \underbrace{\ket{x}}_n\underbrace{\left|0 \dots
+  0\right>}_m.
+\label{eqQuantCompQuantComp}
+\end{equation}

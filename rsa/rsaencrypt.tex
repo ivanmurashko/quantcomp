@@ -1,0 +1,18 @@
+%% -*- coding:utf-8 -*-
+Suppose we need to encrypt a certain message $M$. Initially, it is
+converted into an integer (or integers) $m$ such that 
+$0 < m < \phi\left(n\right)$. The encrypted text $c$ is then calculated:
+\begin{equation}
+c \equiv m^e \mod{n}
+\label{eqAddRSACode}
+\end{equation}
+
+\begin{example}
+\emph{(RSA. Encryption)}
+Suppose we have a public key $\left(n=21, e=5\right)$ (see Ex. \ref{exAddRSAKeyGen}) 
+and we want to encrypt the following message $m = 1101_2 = 11_{10}$. 
+%(%i1) power_mod(11,5,21);         
+%(%o1)                                  2
+The ciphertext is calculated using formula \eqref{eqAddRSACode} $c \equiv 11^5 \mod{21} = 2$.
+\label{exAddRSACode}
+\end{example}

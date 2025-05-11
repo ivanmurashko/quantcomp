@@ -1,0 +1,96 @@
+%% -*- coding:utf-8 -*- 
+\section{RSA Algorithm}
+\label{AddRSA}
+\rindex{RSA algorithm}
+The RSA algorithm (abbreviation from the last names Rivest, Shamir, and Adleman) is 
+an asymmetric encryption algorithm
+\footnote{An asymmetric (public key) encryption algorithm uses two different keys: one for encryption and the other for decryption},  
+based on the complexity of factorizing a number into prime factors.  
+
+\subsection{Key Generation}
+\rindex{RSA algorithm!key generation}
+Consists of several steps
+\input ./rsa/rsagenalgo.tex
+
+The original numbers $p$ and $q$ are kept secret, as with their help,
+the calculation of $\phi(n)$ becomes trivial.
+
+It should be noted that to obtain the private key from the public key,
+one must calculate $\phi(n)$ given $n$. This task is difficult (if $p$ and $q$ are unknown), as noted in comment \ref{rem:add:discretmath:eulerfuncomplex}. 
+
+\input ./rsa/rsagenex.tex
+
+\subsection{Encryption}
+\rindex{RSA algorithm!encryption}
+\input ./rsa/rsaencrypt.tex
+
+\subsection{Decryption}
+\rindex{RSA algorithm!decryption}
+\input ./rsa/rsadecrypt.tex
+
+\subsection{Proof}
+We want to prove that 
+\[
+\left(m^e\right)^d \equiv m \mod{p \cdot q}
+\]
+for any positive number $m$ when $p$ and $q$ are prime numbers, and $e$
+and $d$ satisfy the expression
+\[
+d \cdot e \equiv 1 \mod{\phi\left(p \cdot q\right)},
+\]
+which we can rewrite as
+\[
+d \cdot e - 1 = h \left(p - 1\right)\left(q - 1\right).
+\]
+
+Thus,
+\[
+m^{e\cdot d} =m m^{h \left(p - 1\right)\left(q - 1\right)}.
+\]
+Then there are two cases: when $m$ is divisible by $p$ and when $m$ and $p$
+are coprime.
+
+In the first case 
+\[
+m^{e\cdot d} \equiv m \equiv 0 \mod{p}
+\]
+In the second case, we use
+\myref{addDiscretSmallFerma}{Fermat's Little Theorem}:
+\[
+m m^{h \left(p - 1\right)\left(q - 1\right)} 
+= m \left(m^{p - 1}\right)^{h \left(q - 1\right)} \equiv m \cdot 1^{h
+  \left(q - 1\right)} \equiv m \mod{p}.
+\]
+Similarly, we have either
+\[
+m^{e\cdot d} \equiv m \equiv 0 \mod{q}
+\]
+or due to Fermat's Little Theorem
+\[
+m m^{h \left(p - 1\right)\left(q - 1\right)} 
+= m \left(m^{q - 1}\right)^{h \left(p - 1\right)} \equiv m \cdot 1^{h
+  \left(p - 1\right)} \equiv m \mod{q}.
+\]
+Thus, we have the following two types of relationships:
+the trivial equality
+\begin{eqnarray}
+x_1 = m \equiv m \mod p,
+\nonumber \\
+x_1 = m \equiv m \mod q,
+\nonumber
+\end{eqnarray}
+and the newly obtained relationships
+\begin{eqnarray}
+x_2 = m^{ed} \equiv m \mod p,
+\nonumber \\
+x_2 = m^{ed} \equiv m \mod q,
+\nonumber
+\end{eqnarray}
+from which, by virtue of \myref{thm:chineseremainder}{the Chinese Remainder Theorem}
+\[
+x_1 \equiv x_2 \mod p \cdot q
+\]
+i.e.
+\[
+m^{e\cdot d} \equiv m \mod n
+\]

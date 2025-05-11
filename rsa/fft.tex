@@ -1,0 +1,47 @@
+\subsection{Fast Fourier Transform}
+Calculations using formula \eqref{eqAddFourierDiscretFourier} have a complexity of order $O\left(M^2\right)$, where $M$ is the number of elements (samples) \footnote{Indeed, it is necessary to obtain $M$ elements, for each of which $M$ multiplication operations are required}. 
+
+There is an algorithm for fast calculation using formula \eqref{eqAddFourierDiscretFourier} which has a complexity of $O\left(M \log{M}\right)$.
+
+Using the divide and conquer paradigm (see \autoref{addDivideAndConquer}), one can notice the form of the recording \eqref{eqAddFourierDiscretFourierMatrixElem2} and observe that the expression \eqref{eqAddFourierDiscretFourier} can be rewritten as
+\begin{equation}
+\tilde{X}_k = \sum^{M - 1}_{m = 0} F_{km}^{M} x_m,
+\nonumber
+\end{equation}
+where the notation $F_{km}^{M}$ indicates that the matrix \eqref{eqAddFourierDiscretFourierMatrixElem2} of size $M \times M$ is used.
+If $M$ is even, then
+\begin{equation}
+\tilde{X}_k = \sum^{M - 1}_{m = 0} F_{k,m}^{M} x_m = 
+\sum^{\frac{M}{2} - 1}_{m = 0} F_{k,2m}^M x_{2m} +
+\sum^{\frac{M}{2} - 1}_{m = 0} F_{k,2m + 1}^M x_{2m + 1},
+\nonumber
+\end{equation}
+where
+\begin{eqnarray}
+F_{k,2m}^{M} = e^{-i \omega k 2m} = e^{-i k m \frac{2\pi}{\frac{M}{2}}
+} = F_{k,m}^{\frac{M}{2}},
+\nonumber \\
+F_{k,2m + 1}^{M} = e^{-i \omega k \left(2m+1\right)} = 
+e^{-i \omega k}e^{-i k m \frac{2\pi}{\frac{M}{2}}} = 
+e^{-2\pi i \frac{k}{M}}F_{k,m}^{\frac{M}{2}},
+\nonumber
+\end{eqnarray}
+i.e.,
+\begin{equation}
+\tilde{X}_k = \sum^{\frac{M}{2} - 1}_{m = 0} F_{k,m}^{\frac{M}{2}} x_{2m} +
+\exp{\left(-2\pi i \frac{k}{M}\right)}
+\sum^{\frac{M}{2} - 1}_{m = 0}  F_{k,m}^{\frac{M}{2}} x_{2m + 1}.
+\label{eqAddFourierDiscretFourierFFT}
+\end{equation}
+The complexity of calculations using formula \eqref{eqAddFourierDiscretFourierFFT} is determined by the following relation
+\begin{equation}
+T\left( M \right) = 2 T\left( \frac{M}{2} \right) + O\left( M \right).
+\label{eqAddFourierDiscretFourierFFTComplexity}
+\end{equation}
+The validity of \eqref{eqAddFourierDiscretFourierFFTComplexity} can be verified by noticing that the calculations of complexity $T\left( M \right)$ in \eqref{eqAddFourierDiscretFourierFFT} break down into two sub-problems of complexity $T\left( \frac{M}{2} \right)$.
+
+Using \myref{addAlgoMasterTheorem}{the master theorem for recurrence relations (case 2)}, we obtain
+\begin{equation}
+T\left( M \right) = O\left( M \log{M} \right).
+\nonumber
+\end{equation}

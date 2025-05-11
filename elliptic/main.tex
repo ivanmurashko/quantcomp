@@ -1,0 +1,6 @@
+\chapter{Elliptic Cryptography}
+Currently, a special type of discrete logarithmization known as elliptic curve cryptography is particularly popular. The reason for this popularity is the fact that there are currently no effective algorithms for breaking elliptic curve cryptography. The most effective classical algorithm, Pollard's $\rho$-method, has an efficiency of $O\left(\sqrt{N}\right)$ \cite{Pollard}. This advantageously distinguishes these cryptographic algorithms from RSA and conventional discrete logarithmization, for which sufficiently effective classical algorithms for breaking exist, necessitating the use of longer numerical sequences for these algorithms, for example, 4096 bits for RSA.
+
+\input elliptic/elliptic.tex
+\input elliptic/ecdh.tex
+\input elliptic/shorelliptic.tex

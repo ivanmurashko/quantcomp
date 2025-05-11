@@ -1,0 +1,20 @@
+\section{ECDH Algorithm}
+
+\rindex{ECDH Algorithm}
+The ECDH algorithm is a modification of the Diffie-Hellman algorithm (see \autoref{sec:add:dm:dh}) for elliptic curves. The Diffie-Hellman protocol is a key exchange protocol. In our case, the following elliptic curve parameters are published: $(p,a,b,g,n,h)$, where $p,a,b$ define the curve 
+\[
+E\left(\mathbb{F}_p\right) = \{(x,y): y^2 \equiv x^3 +a x + b \mod p
+\} \cup \{0\},
+\]
+$g$ is the base point of order $n$: $\left|\left<g\right>\right| = n$, $h$ is the cofactor of the group $\left<g\right>$, i.e., the order of the curve (see def. \ref{def:elliptic_curve_order}) $\left|E\right| = nh$.
+
+Alice chooses a private key $d_a \in \{1, \dots, n - 1\}$ and forms a public key $A = d_a g$. Bob also forms private $d_b \in \{1, \dots, n - 1\}$ and public $B = d_b g$ keys. Alice and Bob exchange these keys. Then each of them computes the actual key by the rule $K = d_a B = d_b A$. 
+
+\begin{example}[ECDH Algorithm]
+\label{ex:add:discretmath:ecdh}
+Take the curve and base point from ex. \ref{ex:add:elliptic:basepoint}. Thus, 
+\[
+(p,a,b,g,n,h) = (97, -7, 10, (96,93), 41, 2)
+\]
+Alice chooses $d_a = 5$, i.e., $A = (37, 35)$. Bob chooses $d_b = 15$, thus $B = (15,51)$. The key for Alice $K = d_a B = (46,11)$ and the key for Bob $K = d_b A = (46,11)$ match. 
+\end{example}

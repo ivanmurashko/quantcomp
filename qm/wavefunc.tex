@@ -1,0 +1,409 @@
+\section{Dynamics of the Wave Function Change}
+\label{AddWaveFunc}
+The wave function $\left| \phi \right>$ can change via two mechanisms:
+\begin{itemize}
+\item Wave function reduction during measurement
+\item Schrödinger equation between two successive measurements
+\end{itemize}
+
+\subsection{Schrödinger Equation}
+The change in the state of a pure quantum system between two successive measurements is described by the following equation (Schrödinger)
+\begin{equation}
+i \hbar \frac{\partial \left| \phi \right>}{\partial t} = \hat{\mathcal{H}}
+\left| \phi \right>.
+\label{eqAddWaveFunc_Shredinger}
+\end{equation}
+
+Equation \eqref{eqAddWaveFunc_Shredinger} is reversible and, accordingly, not applicable to describing the change in the wave function at the moment of measurement.
+
+It is worth noting the connection of the Schrödinger equation with \myref{thm:stone}{Stone's theorem} TBD.
+
+\subsubsection{Schrödinger Equation in the Interaction Representation}
+\label{AddWaveFuncInter}
+Let's assume that the Hamiltonian can be divided into two parts:
+\begin{equation}
+\hat{\mathcal{H}} = \hat{\mathcal{H}}_0 + \hat{\mathcal{V}}.
+\nonumber
+\end{equation}
+
+Let's introduce the following wave function transformation:
+\[
+\left| \phi \right>_I = 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\left| \phi \right>
+\]
+and examine the following expression:
+\begin{eqnarray}
+i \hbar \frac{\partial \left| \phi \right>_I}{\partial t} = 
+i \hbar \frac{i \hat{\mathcal{H}}_0}{\hbar} 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\left| \phi \right> +
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+i \hbar \frac{\partial \left| \phi \right>}{\partial t} = 
+\nonumber \\
+= - \hat{\mathcal{H}}_0 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\left| \phi \right> +
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\left(
+\hat{\mathcal{H}}_0 + \hat{\mathcal{V}}
+\right)
+\left| \phi \right> =
+\nonumber \\ 
+- \hat{\mathcal{H}}_0 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\left| \phi \right> +
+\hat{\mathcal{H}}_0 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\left| \phi \right>
++
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+ \hat{\mathcal{V}}
+\left| \phi \right> =
+\nonumber \\
+= 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+ \hat{\mathcal{V}}
+\left| \phi \right> = 
+\nonumber \\
+= 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+ \hat{\mathcal{V}}
+\exp{\left( - \frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\left| \phi \right> = 
+\nonumber \\
+= 
+ \hat{\mathcal{V}}_I \left| \phi \right>_I,
+\nonumber
+\end{eqnarray}
+where 
+\begin{equation}
+\hat{\mathcal{V}}_I = 
+\exp{\left(\frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+ \hat{\mathcal{V}}
+\exp{\left( - \frac{i \hat{\mathcal{H}}_0 t}{\hbar}\right)}
+\label{eqAddWaveFunc_VInter}
+\end{equation} 
+is the interaction Hamiltonian in the interaction representation.
+
+Thus, we obtain the Schrödinger equation in the interaction representation:
+\begin{equation}
+i \hbar \frac{\partial \left| \phi \right>_I}{\partial t} = \hat{\mathcal{V}}_I
+\left| \phi \right>_I.
+\label{eqAddWaveFunc_ShredingerInter}
+\end{equation}
+
+\subsubsection{Density Matrix Equation of Motion}
+From the relation \eqref{eqAddWaveFunc_Shredinger} we have
+\begin{eqnarray}
+i \hbar \frac{\partial \left| \phi \right>}{\partial t} = \hat{\mathcal{H}}
+\left| \phi \right>,
+\nonumber \\
+- i \hbar \frac{\partial \left< \phi \right|}{\partial t} = \hat{\mathcal{H}}
+\left< \phi \right|,
+\nonumber
+\end{eqnarray}
+thus for the density matrix 
+$\hat{\rho} = \left| \phi \right>\left< \phi \right|$ we obtain
+\begin{eqnarray}
+i \hbar \frac{\partial \hat{\rho} }{\partial t} = 
+i \hbar \frac{\partial  \left| \phi \right>\left< \phi \right|
+}{\partial t} = 
+i \hbar \left( \frac{\partial \left| \phi \right>}{\partial t}\left< \phi
+\right| +
+\left| \phi \right> \frac{\partial \left< \phi \right|}{\partial t}
+\right) =
+\nonumber \\
+=  \hat{\mathcal{H}} \left| \phi \right>\left< \phi \right| -
+\left| \phi \right>\left< \phi \right|\hat{\mathcal{H}} = 
+\left[ \hat{\mathcal{H}}, \hat{\rho} \right]
+\label{eqAddWaveFunc_Pho}
+\end{eqnarray}
+Equation \eqref{eqAddWaveFunc_Pho} is often called the quantum Liouville equation and the von Neumann equation.
+
+\subsubsection{Evolution Operator. Heisenberg and Schrödinger Representations}
+
+The change in the wave function governed by \eqref{eqAddWaveFunc_Shredinger} can also be described using some operator (evolution) $\hat{U}\left(t,t_0\right)$:
+\begin{equation}
+\left| \phi\left(t\right) \right> = 
+\hat{U}\left(t,t_0\right)\left| \phi\left(t_0\right) \right>.
+\label{eqAddWaveFunc_ShredingerU}
+\end{equation}
+
+Equation \eqref{eqAddWaveFunc_Shredinger} can be rewritten in the form
+\begin{equation}
+\left| \phi\left(t\right) \right> = 
+\exp\left( -\frac{i}{\hbar} \hat{\mathcal{H}} \left( t - t_0 \right)  \right)
+\left| \phi\left(t_0\right) \right>,
+\nonumber
+\end{equation}
+from which we have for the evolution operator
+\begin{equation}
+\hat{U}\left(t,t_0\right) = 
+\exp\left( -\frac{i}{\hbar} \hat{\mathcal{H}} \left( t - t_0 \right)  \right)
+\label{eqAddDiracEvolutionOper}
+\end{equation}
+
+The evolution operator is unitary. Indeed:
+\begin{eqnarray}
+\hat{U}\left(t,t_0\right)\hat{U}^\dag\left(t,t_0\right) = 
+\nonumber \\
+= \exp\left( -\frac{i}{\hbar} \hat{\mathcal{H}} \left( t - t_0 \right)
+\right)
+\exp\left( +\frac{i}{\hbar} \hat{\mathcal{H}} \left( t - t_0 \right)
+\right)
+= \hat{I}
+\nonumber
+\end{eqnarray}
+
+Along with the Schrödinger representation where operators do not depend on time and wave functions change, there exists the Heisenberg representation where operators change with time.
+
+Obviously, the average values of operators should not depend on the representation:
+\begin{eqnarray}
+\left< \phi_H\left(t_0\right) \right|\hat{A}_H\left(t\right)\left| 
+\phi_H\left(t_0\right) \right> = 
+\left< \phi_S\left(t\right) \right|\hat{A}_S\left| 
+\phi_S\left(t\right) \right> = 
+\nonumber \\
+=
+\left<
+\phi_H\left(t_0\right)\right|\hat{U}^\dag\left(t,t_0\right)\hat{A}_S\hat{U}\left(t,t_0\right)\left|
+\phi_H\left(t_0\right) \right>,
+\nonumber
+\end{eqnarray}
+from which, taking into account $\hat{A}_H\left(t_0\right) = \hat{A}_S\left(t_0\right)$, we obtain the evolution law of operators in the Heisenberg representation:
+\begin{equation}
+\hat{A}_H\left(t\right) = \hat{U}^\dag\left(t,t_0\right)\hat{A}_H\left(t_0\right)\hat{U}\left(t,t_0\right)
+\label{eqAddWaveFunc_HeizenbergU}
+\end{equation}
+
+At the same time, the equation for the operator $\hat{A}_H$ will look as follows:
+\begin{eqnarray}
+  \frac{\partial \hat{A}_H}{\partial t} =
+  \frac{i}{\hbar} \hat{\mathcal{H}}
+  \hat{U}^\dag\left(t,t_0\right)\hat{A}_H\left(t_0\right)\hat{U}\left(t,t_0\right)
+  -
+  \nonumber \\
+  - \frac{i}{\hbar}
+  \hat{U}^\dag\left(t,t_0\right)\hat{A}_H\left(t_0\right)\hat{U}\left(t,t_0\right)
+  \hat{\mathcal{H}} =
+  \frac{i}{\hbar} \left[\hat{\mathcal{H}}, \hat{A}_H \right]
+  \label{eqAddWaveFunc_HeizenbergT}
+\end{eqnarray}
+
+\subsection{Differences Between Pure and Mixed States. Decoherence}
+\begin{definition}[Pure State]
+If the state of a system is described by a density matrix $\hat{\rho}$ that can be represented as 
+\begin{equation}
+\hat{\rho} = \ket{\psi}\bra{\psi}
+\label{eq:add:quant:purestate}
+\end{equation}
+then the state is called pure.
+\end{definition}
+
+\begin{definition}[Mixed State]
+If the state of a system is described by a density matrix $\hat{\rho}$ that \textbf{cannot} be represented as in \eqref{eq:add:quant:purestate}, i.e. 
+\[
+\hat{\rho} \ne \ket{\psi}\bra{\psi}
+\]
+then the state is called mixed.
+\end{definition}
+
+A particular interest is the difference between pure and mixed states, in particular - how the transition from pure states to mixed states occurs.
+
+Consider a two-level state (see \autoref{figAddDecoherenceModel}). In a pure state, it is described by the following wave function:
+\begin{equation}
+\left|\phi\right> = c_a \ket{a } + c_b \ket{b},
+\nonumber
+\end{equation}
+the corresponding density matrix appears as
+\rindex{Density Matrix}
+\begin{eqnarray}
+\hat{\rho} = \left|\phi\right>\left<\phi\right| =
+\nonumber \\
+= 
+\left|c_a\right|^2 \ket{a}\bra{a} + 
+\left|c_b\right|^2 \ket{b}\bra{b} +
+\nonumber \\
++
+c_a c_b^{\ast}\ket{a}\bra{b} +
+c_b c_a^{\ast}\ket{b}\bra{a},
+\label{eqAddDecoherencePure}
+\end{eqnarray}
+or in matrix form
+\begin{eqnarray}
+\hat{\rho} = 
+\begin{pmatrix}
+\left|c_a\right|^2 & c_a c_b^{\ast} \\
+c_b c_a^{\ast} & \left|c_b\right|^2 \\
+\end{pmatrix}.
+\nonumber
+\end{eqnarray}
+
+The density matrix 
+\rindex{Density Matrix}
+for a mixed state has only diagonal elements:
+\begin{eqnarray}
+\hat{\rho} = 
+\begin{pmatrix}
+\left|c_a\right|^2 & 0 \\
+0 & \left|c_b\right|^2 \\
+\end{pmatrix} = 
+\nonumber \\
+=
+\left|c_a\right|^2 \ket{a}\bra{a} + 
+\left|c_b\right|^2 \ket{b}\bra{b}.
+\label{eqAddDecoherenceMix}
+\end{eqnarray}
+
+\input qm/figdecoherence.tex
+
+The transition from \eqref{eqAddDecoherencePure} to \eqref{eqAddDecoherenceMix} is called decoherence.\rindex{Decoherence}
+In describing the decoherence process, we will follow \cite{bMensky2001}. 
+
+The distinction between mixed and pure states manifests in the effect of the environment $\mathcal{E}$. In the case of pure states, the system considered and its environment are independent, i.e.
+\begin{equation}
+\left|\phi\right>_{pure} = \left|\phi\right>_{at} \otimes
+\left|\mathcal{E}\right>.
+\label{eqAddDecoherencePhiPure}
+\end{equation}
+
+In the case of mixed states, the atom and its environment form a so-called entangled state where states $\ket{a}$ and $\ket{b}$ correspond to distinguishable states of the environment $\left|\mathcal{E}_a\right>$ and $\left|\mathcal{E}_b\right>$.
+\begin{equation}
+\left|\phi\right>_{mix} = c_a\ket{a} \left|\mathcal{E}_a\right>
++ c_b\ket{b} \left|\mathcal{E}_b\right>.
+\label{eqAddDecoherencePhiMix}
+\end{equation}
+
+The density matrix 
+\rindex{Density Matrix}
+corresponding to \eqref{eqAddDecoherencePhiMix} appears as
+
+\begin{eqnarray}
+\hat{\rho}_{mix} = \left|\phi\right>_{mix}\left<\phi\right|_{mix} = 
+\nonumber \\
+= 
+\left|c_a\right|^2 \ket{a}\bra{a} \otimes
+\left|\mathcal{E}_a\right>\left<\mathcal{E}_a\right| + 
+\left|c_b\right|^2 \ket{b}\bra{b} \otimes
+\left|\mathcal{E}_b\right>\left<\mathcal{E}_b\right| +
+\nonumber \\
++
+c_a c_b^{\ast}\ket{a}\bra{b} \otimes
+\left|\mathcal{E}_a\right>\left<\mathcal{E}_b\right| +
+c_b c_a^{\ast}\ket{b}\bra{a} \otimes
+\left|\mathcal{E}_b\right>\left<\mathcal{E}_a\right|.
+\label{eqAddDecoherenceRhoMix}
+\end{eqnarray}
+If we now apply averaging over the environment variables to expression \eqref{eqAddDecoherenceRhoMix}, we obtain
+\begin{eqnarray}
+\left<\hat{\rho}_{mix}\right>_{\mathcal{E}} = 
+Sp_{\mathcal{E}}\left(\hat{\rho}\right) = 
+\nonumber \\
+=
+\left<\mathcal{E}_a\right|\hat{\rho}_{mix}\left|\mathcal{E}_a\right> +
+\left<\mathcal{E}_b\right|\hat{\rho}_{mix}\left|\mathcal{E}_b\right>
+= 
+\nonumber \\
+= \left|c_a\right|^2 \ket{a}\bra{a} + 
+\left|c_b\right|^2 \ket{b}\bra{b}.
+\label{eqAddDecoherenceRhoMixFin}
+\end{eqnarray}
+Expression \eqref{eqAddDecoherenceRhoMixFin} is obtained under the assumption of an orthonormal basis $\left\{\left|\mathcal{E}_a\right>, \left|\mathcal{E}_b\right>\right\}$: 
+\begin{eqnarray}
+\left<\mathcal{E}_a\right.\left|\mathcal{E}_a\right> = 
+\left<\mathcal{E}_b\right.\left|\mathcal{E}_b\right> = 1,
+\nonumber \\
+\left<\mathcal{E}_a\right.\left|\mathcal{E}_b\right> = 
+\left<\mathcal{E}_b\right.\left|\mathcal{E}_a\right> = 0.
+\label{eqAddDecoherenceMixECond}
+\end{eqnarray}
+
+The conditions \eqref{eqAddDecoherenceMixECond} are key to understanding why the considered atomic system basis is distinguished and why, for example, other bases such as the Hadamard transform basis relative to the original are not considered for mixed states \rindex{Hadamard Transform}:
+\begin{eqnarray}
+\left|\mathcal{A}\right> = \frac{\ket{a} + \ket{b}}
+              {\sqrt{2}},
+\nonumber \\
+\left|\mathcal{B}\right> = \frac{\ket{a} - \ket{b}}
+              {\sqrt{2}}.
+\label{eqAddDecoherenceBaseWrong}
+\end{eqnarray}
+The environmental states corresponding to the basis \eqref{eqAddDecoherenceBaseWrong} are not orthogonal, hence the impossibility of using \eqref{eqAddDecoherenceBaseWrong} as basis vectors for mixed states.
+
+The process of decoherence, i.e., the transition from \eqref{eqAddDecoherencePhiPure} to \eqref{eqAddDecoherencePhiMix}, can be described using the Schrödinger equation, and thus is theoretically reversible. The only requirement is the orthogonality of distinguishable environmental states: $\left<\mathcal{E}_a\right.\left|\mathcal{E}_b\right> = 0$. This requirement is always fulfilled for macroscopic systems, where the state depends on a very large number of variables. At the same time, in the case of macroscopic systems, it should be noted that there are many possible variants of final states $\left|\mathcal{E}_{a,b}\right>$ such that the reverse process becomes practically unrealisable, as it is necessary to control a large number of possible variables described by the state of the environment. In this sense, the decoherence process has the same nature as the second law of thermodynamics (increasing entropy), which describes irreversible processes.
+\footnote{One should be a bit careful here since the second law of thermodynamics applies to closed systems, and decoherence processes themselves occur in open systems.}
+
+The decoherence process is very fast, in particular \cite{bZurek02} provides the following estimate: for systems with a mass of 1 g at a separation $\Delta x = 1 \mbox{ cm.}$ and a temperature $T=300 \mbox{ K }$, with relaxation time equal to the lifetime of the Universe $\tau_R = 10^{17} \mbox{ s. }$, the decoherence process takes $10^{-23} \mbox{ s. }$ \rindex{Decoherence!speed}
+
+\subsection{Wave Function Reduction. Measurement in Quantum Mechanics}
+\label{sec:add:reduction}
+
+The process of choice (measurement result) is one of the most complex in quantum mechanics. Unlike the deterministic change of the wave function described by the Schrödinger equation \eqref{eqAddWaveFunc_Shredinger}, the measurement process is random in nature and requires different equations for its description.
+
+\input ./qm/figmeasur.tex
+
+Let's first consider pure states \rindex{Pure state} and assume that a measurement of a physical observable is being made, described by the operator $\hat{L}$. The eigenvalues and eigenfunctions of this operator are $\left\{ l_k \right\}$ and $\left\{ \ket{l_k} \right\}$ respectively. At the moment of measurement, instrument readings can take values corresponding to the eigenvalues of the measured operator (see \autoref{figAddMeasur}). Suppose the instrument reading is $l_n$, in this case the wave function should be $\ket{l_n}$, thus the following change in the wave function occurred:
+\[
+\left| \phi \right> \rightarrow \ket{l_n},
+\] 
+which can be described by the action of the projection operator $\hat{P}_n = \ket{l_n} \bra{l_n}$ \eqref{eqDiracProektor}:
+\[
+\hat{P}_n \left| \phi \right> = c_n\ket{l_n}.
+\]
+
+\begin{example}[Measurement of the Energy of a Two-Level Atom]
+Consider a two-level atom in a pure state (see \autoref{fig:add:mesure_ex}) 
+\(
+\left|\psi\right> = \frac{1}{\sqrt{2}}\ket{a}
++ \frac{1}{\sqrt{2}}\ket{b}
+\).
+
+\input ./qm/figmeasurex.tex
+
+Our instrument measures the energy of this atom and the Hamiltonian operator has 2 eigenfunctions $\ket{a,b}$, corresponding to eigenvalues $E_a, E_b$. Thus, possible instrument readings belong to the set $\{E_a, E_b\}$.
+
+\input ./qm/figmeasurex_a.tex
+
+In the case where the instrument's needle shows $E_a$, the following reduction occurs (see \autoref{fig:add:mesure_ex_a})
+\[
+\left|\psi\right> \to \ket{a}.
+\]
+
+\input ./qm/figmeasurex_b.tex
+
+Similarly, in the case of $E_b$, the following reduction occurs (see \autoref{fig:add:mesure_ex_b})
+\[
+\left|\psi\right> \to \ket{b}.
+\]
+\end{example}
+
+There is no way to predict the result that will be obtained from a single measurement. However, one can say with what probability a particular result will be obtained.
+
+Indeed, in the case of a mixed state
+\begin{equation}
+\hat{\rho} = 
+\sum_n \left|c_n\right|^2 \ket{l_n}\bra{l_n}
+\nonumber
+\end{equation}
+the coefficients $P_n = \left|c_n\right|^2$ define the probabilities of finding the system in the state $\ket{l_n}$.
+
+For a pure state
+\begin{equation}
+\left| \phi \right> = 
+\sum_n c_n \ket{l_n}
+\nonumber
+\end{equation}
+we also have that the probability of finding the system in state $\ket{l_n}$ is given by the number $P_n = \left|c_n\right|^2$.
+
+The main difference between pure and mixed states in terms of measurement is that in the first case (pure state), the measurement changes the wave function, i.e., the state itself. At the same time, if during the measurement a certain final state $\ket{l_i}$ was obtained, one can't say it was the same before the measurement. Mixed states \rindex{Mixed state} behave like classical objects, i.e., if during the measurement a state $\ket{l_i}$ was obtained, it can be asserted it was the same before the measurement, and the measurement represents a selection of one state from many possible ones.
+
+\begin{example}
+\emph{Choosing from an urn with balls of two colors}
+Suppose we have an urn with 4 balls. With a probability of $\frac{1}{2}$, either a white or black ball will be drawn. Suppose that as a result of the experiment, a black ball is obtained. If the considered system is quantum and in a mixed state (see \autoref{figAddMixStateExample}), the state of the drawn ball (color) did not change as a result of the experiment.
+
+\input qm/figmixstateexample.tex
+\input qm/figpurestateexample.tex
+
+If the considered system is pure (see \autoref{figAddPureStateExample}), the state of each ball is described by a superposition of two colors - black and white. Thus, as a result of the experiment, this superposition is destroyed, and the ball acquires a definite color (black in our case), i.e., it can be said that the ball's color changes.
+\end{example}
